@@ -33,22 +33,22 @@ class AddTodo extends Component {
 
   handleSubmit = (event) => {
     const jsonObject = {
-      id: Date.now(), // Generate a unique id for each task
+      id: this.state.id,
       task: this.state.content,
-      currentDate: new Date().toISOString(), // Get the current date/time in ISO format
-      dueDate: this.state.duedate ? this.state.duedate.toISOString() : null // Convert dueDate to ISO format if it exists
+      currentDate: new Date().toISOString(), 
+      dueDate: this.state.duedate ? this.state.duedate.toISOString() : null 
     };
   
     Axios({
       method: "POST",
-      url: "http://localhost:3001/add/item", // Make sure the port number matches your Express server's port
-      data: { jsonObject },
+      url: "http://localhost:3001/add/item",
+      data: {jsonObject},
       headers: {
-        "Content-Type": "application/json"
+         "Content-Type": "application/json"
       }
-    }).then(res => {
+   }).then(res => {
       console.log(res.data.message);
-    });
+   });
   
     event.preventDefault();
     if (this.state.content.trim()) {
